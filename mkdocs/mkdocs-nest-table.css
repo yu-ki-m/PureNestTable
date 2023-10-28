@@ -1,0 +1,29 @@
+/**
+ * mkdocs-nest-table
+ * Copyright (c) Yuki Morishima
+ * https://github.com/yu-ki-m/PureNestTable
+ */
+.nest-table {
+    box-shadow:none !important;
+}
+.nest-table *{
+    box-shadow:none !important;
+}
+table.nest-table>thead>tr>th{
+    background-color:#e5e7eb !important;
+}
+table.nest-table>thead>tr>th{ 
+    background-color:#e5e7eb;
+    color:#111827;
+}
+table.nest-table>thead>tr>th{
+    border-top: 1px solid #b1b1b1 !important;
+    border-left:1px solid #b1b1b1 !important;
+}
+.nest-table .td{
+    border-top: 1px solid #b1b1b1 !important;
+    border-left:1px solid #b1b1b1 !important;
+}
+.nest-table .indent{
+    border-left:1px solid #b1b1b1 !important;
+}
