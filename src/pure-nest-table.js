@@ -1,5 +1,5 @@
 /**
- * nest-table
+ * pure-nest-table
  * Copyright (c) Yuki Morishima
  * https://github.com/yu-ki-m/PureNestTable
  */
