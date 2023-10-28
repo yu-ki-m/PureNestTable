@@ -19,8 +19,8 @@ class NestTable{
 
                 const indent = Math.floor(depth / 4);
 
-                if (trimmedLine.includes('|')) {
-                const parts = trimmedLine.split('|').map(part => part.trim());
+                if (trimmedLine.includes(' | ')) {
+                const parts = trimmedLine.split(' | ').map(part => part.trim());
                 const title = parts[0].replace('-', '').trim();
                 const data = parts.slice(1);
 
