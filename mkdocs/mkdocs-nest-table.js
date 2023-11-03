@@ -3,6 +3,11 @@
  * Copyright (c) Yuki Morishima
  * https://github.com/yu-ki-m/PureNestTable
  */
+/**
+ * pure-nest-table
+ * Copyright (c) Yuki Morishima
+ * https://github.com/yu-ki-m/PureNestTable
+ */
 class NestTable{
     static parseMarkdown2Json = (markdown)=>{
         try{
@@ -88,6 +93,7 @@ class NestTable{
                 border-bottom:1px solid #b1b1b1;
                 border-left: none;
                 border-spacing:0px; 
+                font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
             }
             table.nest-table>thead>tr>th{
                 border-top: 1px solid #b1b1b1;
@@ -131,11 +137,36 @@ class NestTable{
             return ``;
         }
     }
-    
+    static fillMissingValues = (parsedJson) => {
+        let filledJson = parsedJson;
+        parsedJson.output.forEach((item) => {
+            if (item.data.length < parsedJson.maxColumns) {
+                for (let i = item.data.length; i < parsedJson.maxColumns; i++) {
+                    item.data.push('');
+                }
+            }
+        });
+        return filledJson;
+    }
+    static escapeScriptTag = (parsedJson) => {
+        // scriptタグをエスケープする
+        const escapedJson = parsedJson;
+        escapedJson.output.forEach((item) => {
+            item.data = item.data.map((data) => {
+                const escapeScript = data.replace(/<script.*?>/g, '&lt;script&gt;');
+                return escapeScript.replace(/<\/script>/g, '&lt;/script&gt;');
+            });
+        });
+        return escapedJson;
+    }
     static parseMarkdown2Html = (markdown)=>{
         try{
             const parsedJson = NestTable.parseMarkdown2Json(markdown);
-            const tableHtml = NestTable.parseJson2Html(parsedJson);
+            const filledJson = NestTable.fillMissingValues(parsedJson);
+
+
+            const escapeScriptJson = NestTable.escapeScriptTag(filledJson);
+            const tableHtml = NestTable.parseJson2Html(escapeScriptJson);
             return tableHtml;
         }catch(e){
             console.error(e);
@@ -143,6 +174,7 @@ class NestTable{
         }
     }
 }
+
 
 setInterval(()=>{
     try{
