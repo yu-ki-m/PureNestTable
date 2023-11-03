@@ -135,7 +135,7 @@ class NestTable{
     static fillMissingValues = (parsedJson) => {
         let filledJson = parsedJson;
         parsedJson.output.forEach((item) => {
-            if (item.data.length < parsedJson.maxColumns) {
+            if (item.data.length > 1 && item.data.length < parsedJson.maxColumns) {
                 for (let i = item.data.length; i < parsedJson.maxColumns; i++) {
                     item.data.push('');
                 }
