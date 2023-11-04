@@ -113,14 +113,14 @@ class NestTable{
                 transition: background-color 0.2s ease-out;
             }
             .nest-table td{ 
-                min-width:1.5rem; 
+                min-width:0.5rem; 
                 padding:0.0725rem 0.5rem;
             }
             .nest-table tbody tr:hover{
                 background-color:#f3f4f6;
             }
             .nest-table th{ 
-                min-width:1.5rem; 
+                min-width:0.5rem; 
                 padding:0.25rem 0.5rem;
                 background-color:#e5e7eb;
             }
