@@ -21,6 +21,7 @@ table.nest-table>thead>tr>th{
     border-left:1px solid #b1b1b1 !important;
 }
 table.nest-table>tbody>tr>td{ 
+    min-width:0.5725rem !important;
     padding:0.0725rem 0.5rem !important;
 }
 .nest-table .td{

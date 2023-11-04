@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="../core/pure-nest-table.js"></script>
+    <script src="../src/core/pure-nest-table.js"></script>
     <title>Document</title>
 </head>
 <body>
-    <div id="parameter-sheet"></div>
+    <div id="nest-table"></div>
     
     <script>
         
@@ -18,11 +18,6 @@ const markdown = `
         - title3          | data1   | data2   | data3   
         - title4          | data4   | data5   | data6   
     - title5              | data7   | data8   | data9
-- title1                                                
-    - title2                                            
-        - title3          | data1   | data2   | data3   
-        - title4          | data4   | data5   | data6   
-    - title5              | data7   | data8   | data9   
 - title6                  | data10  | data11  | data12
     - title7              
         - title8          | data16  | data17  | data18
@@ -32,7 +27,7 @@ const markdown = `
 
         try{
             const tableHtml  = NestTable.parseMarkdown2Html(markdown);
-            document.getElementById('parameter-sheet').innerHTML = tableHtml;
+            document.getElementById('nest-table').innerHTML = tableHtml;
         }catch(e){
             console.error(e);
         }

@@ -55,30 +55,32 @@ class NestTable{
     }
     static parseJson2Html = (jsonData)=>{
         try{
-            let th0   = `<th colspan="${jsonData.maxDepth}">${jsonData.output[0].title}</th>`;
-            let th = jsonData.output[0].data.map((item, index) => {
-            return `<th>${item}</th>`;
+            const thNo  = `<th>No.</th>`; // No.列
+            const th0   = `<th colspan="${jsonData.maxDepth}">${jsonData.output[0].title}</th>`;
+            const th = jsonData.output[0].data.map((item, index) => {
+                return `<th>${item}</th>`;
             }).join('');
-            let thead = `<thead>${ th0 + th }</thead>`;
+            let thead = `<thead>${ thNo + th0 + th }</thead>`;
 
-            let table = jsonData.output.map((item, index) => {
-            if(index == 0) return;
-            let nestTd = "";
-            for(let i = 0; i < item.indent; i++) {
-                nestTd += "<td class='indent'></td>";
-            }
+            const table = jsonData.output.map((item, index) => {
+                if(index == 0) return;
+                let nestTd = "";
+                for(let i = 0; i < item.indent; i++) {
+                    nestTd += "<td class='indent'></td>";
+                }
 
-            let td0   = ``;
-            if(item.data.length == 0){
-                td0 = nestTd +`<td class='td' colspan="${jsonData.maxDepth + jsonData.maxColumns - item.indent}">${item.title}</td>`;
-            }else{
-                td0 = nestTd +`<td class='td' colspan="${jsonData.maxDepth - item.indent}">${item.title}</td>`;
-            }
-            let td = item.data.map((item, index) => {
-                return `<td class='td' >${item}</td>`;
-            }).join('');
-            let tr = `<tr>${ td0 + td }</tr>`;
-            return tr;
+                const tdNo = `<td class='td tdNo'>${ index }</td>`; // No.列
+                let td0   = ``;
+                if(item.data.length == 0){
+                    td0 = nestTd +`<td class='td' colspan="${jsonData.maxDepth + jsonData.maxColumns - item.indent}">${item.title}</td>`;
+                }else{
+                    td0 = nestTd +`<td class='td' colspan="${jsonData.maxDepth - item.indent}">${item.title}</td>`;
+                }
+                let td = item.data.map((item, index) => {
+                    return `<td class='td' >${item}</td>`;
+                }).join('');
+                let tr = `<tr>${ tdNo + td0 + td }</tr>`;
+                return tr;
             }).join('');
             let tbody = `<tbody>${ table }</tbody>`;
             let style = `<style>
@@ -102,6 +104,10 @@ class NestTable{
                 border-bottom:none;
                 border-left:1px solid #b1b1b1;
             }
+            table.nest-table .tdNo{
+                background-color:#e5e7eb;
+                text-align:center;
+            }
             table.nest-table>tbody>tr>td.indent{
                 border-top: none;
                 border-right:none;
@@ -113,15 +119,15 @@ class NestTable{
                 transition: background-color 0.2s ease-out;
             }
             .nest-table td{ 
-                min-width:0.5rem; 
+                min-width:0.5725rem; 
                 padding:0.0725rem 0.5rem;
             }
             .nest-table tbody tr:hover{
                 background-color:#f3f4f6;
             }
             .nest-table th{ 
-                min-width:0.5rem; 
-                padding:0.25rem 0.5rem;
+                min-width:0.5725rem; 
+                padding:0.0725rem 0.5rem;
                 background-color:#e5e7eb;
             }
             </style>`;
