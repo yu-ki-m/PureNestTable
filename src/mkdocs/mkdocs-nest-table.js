@@ -6,7 +6,8 @@
 class NestTable{
     static parseMarkdown2Json = (markdown)=>{
         try{
-            const lines = markdown.trim().split('\n');
+            
+            const lines = markdown.trim().replace(/\\\n/g, '').split('\n');
             const output = [];
             let maxDepth = -1;
             let maxColumns = 0; // 最大列数
@@ -164,6 +165,8 @@ class NestTable{
         try{
             const parsedJson = NestTable.parseMarkdown2Json(markdown);
             const filledJson = NestTable.fillMissingValues(parsedJson);
+
+            console.log(filledJson);
 
 
             const escapeScriptJson = NestTable.escapeScriptTag(filledJson);
