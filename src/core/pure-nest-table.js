@@ -67,15 +67,15 @@ class NestTable{
                 if(index == 0) return;
                 let nestTd = "";
                 for(let i = 0; i < item.indent; i++) {
-                    nestTd += "<td class='indent'></td>";
+                    nestTd += "<td class='indent not-nest-end-for-indent'></td>";
                 }
 
                 const tdNo = `<td class='td tdNo'>${ index }</td>`; // No.列
                 let td0   = ``;
                 if(item.data.length == 0){
-                    td0 = nestTd +`<td class='td' colspan="${jsonData.maxDepth + jsonData.maxColumns - item.indent}">${item.title}</td>`;
+                    td0 = nestTd +`<td class='td ${jsonData.maxDepth-1 > item.indent ? "not-nest-end-for-indent":""}' colspan="${jsonData.maxDepth + jsonData.maxColumns - item.indent}">${item.title}</td>`;
                 }else{
-                    td0 = nestTd +`<td class='td' colspan="${jsonData.maxDepth - item.indent}">${item.title}</td>`;
+                    td0 = nestTd +`<td class='td ${jsonData.maxDepth-1 > item.indent ? "not-nest-end-for-indent":""}' colspan="${jsonData.maxDepth - item.indent}">${item.title}</td>`;
                 }
                 let td = item.data.map((item, index) => {
                     return `<td class='td' >${item}</td>`;
@@ -85,7 +85,10 @@ class NestTable{
             }).join('');
             let tbody = `<tbody>${ table }</tbody>`;
             let style = `<style>
-            table.nest-table { 
+            .nest-table-container {
+                overflow-x: auto;
+             }
+            .nest-table { 
                 border-top: none;
                 border-right:1px solid #b1b1b1; 
                 border-bottom:1px solid #b1b1b1;
@@ -93,23 +96,23 @@ class NestTable{
                 border-spacing:0px; 
                 font-family: "Hiragino Sans", "Yu Gothic", "Meiryo", sans-serif;
             }
-            table.nest-table>thead>tr>th{
+            .nest-table>thead>tr>th{
                 border-top: 1px solid #b1b1b1;
                 border-right:none;
                 border-bottom:none;
                 border-left:1px solid #b1b1b1;
             }
-            table.nest-table .td{
+            .nest-table .td{
                 border-top: 1px solid #b1b1b1;
                 border-right:none;
                 border-bottom:none;
                 border-left:1px solid #b1b1b1;
             }
-            table.nest-table .tdNo{
+            .nest-table .tdNo{
                 background-color:#e5e7eb;
                 text-align:center;
             }
-            table.nest-table>tbody>tr>td.indent{
+            .nest-table>tbody>tr>td.indent{
                 border-top: none;
                 border-right:none;
                 border-bottom:none;
@@ -131,8 +134,12 @@ class NestTable{
                 padding:0.0725rem 0.5rem;
                 background-color:#e5e7eb;
             }
+            .nest-table .not-nest-end-for-indent{
+                width: 0.5725rem;
+                white-space: nowrap;
+            }
             </style>`;
-            let tableHtml = style+`<table class='nest-table'>${ thead + tbody }</table>`;
+            let tableHtml = style+`<div class='nest-table-container'><table class='nest-table'>${ thead + tbody }</table></div>`;
             return tableHtml;
         }catch(e){
             console.error(e);

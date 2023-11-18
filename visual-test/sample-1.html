@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="../src/core/pure-nest-table.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h2>Sample 1</h2>
+    <div id="nest-table-1"></div>
+    <h2>Sample 2</h2>
+    <div id="nest-table-2"></div>
+    <h2>Sample 3</h2>
+    <div id="nest-table-3"></div>
+    <script>
+        
+const markdown_1 = `
+- column1                 | column2 | column3 | column4 
+- title1                                                
+    - title2                                            
+        - title3          | data1   | data2   | data3   
+        - title4          | data4   | data5   | data6   
+    - title5              | data7   | data8   | data9
+- title6                  | data10  | data11  | data12
+    - title7              
+        - title8          | data16  | data17  | data18
+            - title9      | data19  | data20  | data21
+                - title10 | data22  | data23  | data24
+`;
+
+const markdown_2 = `
+- column1     
+- title1-longstringDataRecordCheck  
+    - title2
+        - title3
+        - title4
+    - title5
+`;
+
+const markdown_3 = `
+- column1                 | column2 | column3 | column4 
+- title1                                              
+    - title2-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check-overflow-x-check
+        - title3 | data1   | data2   | data3   
+        - title4          | data4   | data5   | data6   
+    - title5              | data7   | data8   | data9
+- title6                  | data10  | data11  | data12
+    - title7              
+        - title8          | data16  | data17  | data18
+            - title9      | data19  | data20  | data21
+                - title10 | data22  | data23  | data24
+
+`;
+        try{
+            const tableHtml_1  = NestTable.parseMarkdown2Html(markdown_1);
+            document.getElementById('nest-table-1').innerHTML = tableHtml_1;
+
+            const tableHtml_2  = NestTable.parseMarkdown2Html(markdown_2);
+            document.getElementById('nest-table-2').innerHTML = tableHtml_2;
+
+            const tableHtml_3  = NestTable.parseMarkdown2Html(markdown_3);
+            document.getElementById('nest-table-3').innerHTML = tableHtml_3;
+
+        }catch(e){
+            console.error(e);
+        }
+    </script>
+</body>
+</html>
