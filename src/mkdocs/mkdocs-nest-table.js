@@ -58,9 +58,12 @@ class NestTable{
         try{
             const thNo  = `<th>No.</th>`; // No.列
             const th0   = `<th colspan="${jsonData.maxDepth}">${jsonData.output[0].title}</th>`;
-            const th = jsonData.output[0].data.map((item, index) => {
+            let th = jsonData.output[0].data.map((item, index) => {
                 return `<th>${item}</th>`;
             }).join('');
+            const emptyThLength = jsonData.maxColumns - jsonData.output[0].data.length;
+            th += `<th></th>`.repeat(emptyThLength);
+            
             let thead = `<thead>${ thNo + th0 + th }</thead>`;
 
             const table = jsonData.output.map((item, index) => {

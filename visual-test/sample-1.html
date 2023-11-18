@@ -13,6 +13,8 @@
     <div id="nest-table-2"></div>
     <h2>Sample 3</h2>
     <div id="nest-table-3"></div>
+    <h2>Sample 4</h2>
+    <div id="nest-table-4"></div>
     <script>
         
 const markdown_1 = `
@@ -50,8 +52,16 @@ const markdown_3 = `
         - title8          | data16  | data17  | data18
             - title9      | data19  | data20  | data21
                 - title10 | data22  | data23  | data24
-
 `;
+
+const markdown_4 = `
+- column1              
+- title1                                              
+    - title2
+        - title3          | data1   | data2   | data3   
+        - title4         
+`;
+
         try{
             const tableHtml_1  = NestTable.parseMarkdown2Html(markdown_1);
             document.getElementById('nest-table-1').innerHTML = tableHtml_1;
@@ -61,6 +71,10 @@ const markdown_3 = `
 
             const tableHtml_3  = NestTable.parseMarkdown2Html(markdown_3);
             document.getElementById('nest-table-3').innerHTML = tableHtml_3;
+
+            const tableHtml_4  = NestTable.parseMarkdown2Html(markdown_4);
+            document.getElementById('nest-table-4').innerHTML = tableHtml_4;
+
 
         }catch(e){
             console.error(e);
